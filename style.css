@@ -12,10 +12,217 @@
     --easing: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@import url('extra.css');
+/* --- GLOBAL IMAGE RESET (SAFETY) --- */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* --- MERGED EXTRA.CSS CONTENT START --- */
+
+/* --- Marquee Updates --- */
+/* --- Marquee Updates --- */
+.marquee-logo {
+    height: 60px !important;
+    /* Force height */
+    width: auto !important;
+    /* Force width auto */
+    margin: 0 50px;
+    filter: none;
+    /* Always color */
+    opacity: 1;
+    /* Always visible */
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    object-fit: contain;
+    max-width: none !important;
+    /* Allow width to be whatever aspect ratio needs */
+}
+
+/* Ensure container doesn't collapse or expand weirdly */
+.marquee {
+    display: flex;
+    align-items: center;
+    /* Center images vertically */
+}
+
+.marquee-logo:hover {
+    transform: scale(1.1);
+}
+
+/* --- Uniform Grid System --- */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 40px;
+    margin-top: 50px;
+}
+
+/* Limit previews to 2 items even if screen is huge, for aesthetic centered look if only 2 items exist */
+.section .grid-container:has(.item-card:nth-last-child(2):first-child) {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media (max-width: 768px) {
+    .section .grid-container:has(.item-card:nth-last-child(2):first-child) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.item-card {
+    background: transparent;
+    border: none;
+    padding: 0;
+    transition: transform 0.4s var(--easing);
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- The Visual Container (The "Box") --- */
+.item-visual {
+    width: 100%;
+    aspect-ratio: 4/3;
+    background-color: #0a0a0a;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.item-card:hover .item-visual {
+    border-color: var(--accent-color);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* --- Image Handling within Box --- */
+.item-visual img {
+    /* RESET ANY PREVIOUS WIDTH RULES CAREFULLY */
+    width: 100% !important;
+    /* Ensure it tries to fill depending on mode */
+    height: 100% !important;
+    transition: transform 0.6s var(--easing);
+}
+
+/* MODE 1: Logos (Default) - Centered, contained, padding */
+.item-visual.logo-mode {
+    padding: 40px;
+}
+
+.item-visual.logo-mode img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    /* CRITICAL */
+    filter: grayscale(100%);
+    opacity: 0.8;
+}
+
+.item-card:hover .item-visual.logo-mode img {
+    filter: grayscale(0%);
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+
+    /* Always show color on mobile for logos */
+    .item-visual.logo-mode img {
+        filter: grayscale(0%) !important;
+        opacity: 1 !important;
+    }
+}
+
+/* MODE 2: Projects (Websites) - Cover, Full Bleed */
+.item-visual.project-mode {
+    padding: 0;
+}
+
+.item-visual.project-mode img {
+    object-fit: cover !important;
+    /* CRITICAL */
+    object-position: top center;
+}
+
+.item-card:hover .item-visual.project-mode img {
+    transform: scale(1.05);
+}
+
+/* --- Text Content --- */
+.item-content {
+    padding: 0 10px;
+}
+
+.item-content h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--text-color);
+}
+
+.item-content p {
+    font-size: 0.95rem;
+    color: var(--gray-light);
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.card-link {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-color);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    padding-bottom: 2px;
+    transition: all 0.3s;
+    align-self: flex-start;
+}
+
+.card-link:hover {
+    color: var(--accent-color);
+    border-bottom-color: var(--accent-color);
+}
+
+/* --- Page Headers Refinement --- */
+.page-header {
+    padding: 180px 5% 80px;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.page-header h1 {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    margin-bottom: 20px;
+    line-height: 1.1;
+}
+
+.page-header p {
+    font-size: 1.1rem;
+    color: var(--gray-light);
+}
+
+/* --- Responsive fix for marquee on mobile --- */
+@media (max-width: 768px) {
+    .marquee-logo {
+        height: 40px !important;
+        margin: 0 20px;
+    }
+}
+
+/* --- MERGED EXTRA.CSS CONTENT END --- */
 
 * {
     margin: 0;
+
     padding: 0;
     box-sizing: border-box;
 }
