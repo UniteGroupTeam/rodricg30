@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    
+
     /* --- Hamburger Menu Logic --- */
     const menuToggle = document.getElementById('menu-toggle');
     const menuOverlay = document.getElementById('menu-overlay');
@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     menuToggle.addEventListener('click', () => {
         menuToggle.classList.toggle('active');
         menuOverlay.classList.toggle('active');
-        
+
         // Disable body scroll when menu is open
         if (menuOverlay.classList.contains('active')) {
             document.body.style.overflow = 'hidden';
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('mousemove', (e) => {
         cursor.style.left = e.clientX + 'px';
         cursor.style.top = e.clientY + 'px';
-        
+
         // Small delay for follower
         setTimeout(() => {
             follower.style.left = e.clientX + 'px';
@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Hover effect for Interactive Elements
     const interactiveElements = document.querySelectorAll('a, button, .menu-toggle, .timeline-item');
-    
+
     interactiveElements.forEach(el => {
         el.addEventListener('mouseenter', () => {
             document.body.classList.add('hovering');
@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, observerOptions);
 
     const animatedElements = document.querySelectorAll('.timeline-item, .about-card, .section-title, .contact-info');
-    
+
     animatedElements.forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(30px)';
@@ -89,7 +89,36 @@ document.addEventListener('DOMContentLoaded', () => {
     /* --- Endless Marquee Logic (Duplication) --- */
     const marqueeContent = document.getElementById('marquee-content');
     // Clone content to ensure seamless loop
-    const clone = marqueeContent.innerHTML;
-    marqueeContent.innerHTML += clone;
+    if (marqueeContent) {
+        const clone = marqueeContent.innerHTML;
+        marqueeContent.innerHTML += clone;
+    }
+
+    /* --- Menu Hint Logic --- */
+    const menuHint = document.getElementById('menu-hint');
+    if (menuHint) {
+        // Show after 3 seconds
+        setTimeout(() => {
+            menuHint.style.opacity = '1';
+
+            // Auto hide after 4 seconds (total 7s from load) for mobile/all
+            setTimeout(() => {
+                menuHint.style.opacity = '0';
+            }, 4000);
+
+        }, 3000);
+
+        // Hide on any interaction (Early dismiss)
+        const hideHint = () => {
+            menuHint.style.opacity = '0';
+            // Remove listeners after hiding
+            window.removeEventListener('click', hideHint);
+            window.removeEventListener('scroll', hideHint);
+            window.removeEventListener('mousemove', hideHint);
+        };
+
+        window.addEventListener('click', hideHint);
+        window.addEventListener('scroll', hideHint);
+    }
 
 });
