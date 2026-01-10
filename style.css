@@ -277,6 +277,19 @@ body.hovering .cursor-follower {
     border-color: var(--accent-color);
 }
 
+/* --- Mobile / Touch Device Optimization --- */
+@media (hover: none) and (pointer: coarse) {
+
+    .cursor,
+    .cursor-follower {
+        display: none !important;
+    }
+
+    * {
+        cursor: auto !important;
+    }
+}
+
 /* --- Navigation --- */
 .navbar {
     position: fixed;
