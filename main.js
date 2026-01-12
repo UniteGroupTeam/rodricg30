@@ -121,4 +121,45 @@ document.addEventListener('DOMContentLoaded', () => {
         window.addEventListener('scroll', hideHint);
     }
 
+    /* --- Lightbox Logic --- */
+    // Create lightbox HTML
+    const lightbox = document.createElement('div');
+    lightbox.className = 'lightbox-overlay';
+    lightbox.innerHTML = `
+        <div class="lightbox-close">&times;</div>
+        <img src="" alt="Zoom" class="lightbox-img">
+    `;
+    document.body.appendChild(lightbox);
+
+    const lightboxImg = lightbox.querySelector('.lightbox-img');
+    const lightboxClose = lightbox.querySelector('.lightbox-close');
+
+    // Add click event to all zoomable images
+    const zoomableImages = document.querySelectorAll('.zoomable-img');
+    zoomableImages.forEach(img => {
+        img.addEventListener('click', () => {
+            lightboxImg.src = img.src;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Stop scrolling
+        });
+    });
+
+    // Close functionality
+    const closeLightbox = () => {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+    };
+
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) closeLightbox();
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+            closeLightbox();
+        }
+    });
+
 });
