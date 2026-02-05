@@ -1,0 +1,116 @@
+/* --- Content Creation / Socials Section --- */
+.content-creation-section {
+    background: #0a0a0a;
+    padding: 80px 5%;
+    position: relative;
+    overflow: hidden;
+}
+
+.content-creation-section::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(220, 38, 38, 0.1) 0%, rgba(0, 0, 0, 0) 70%);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.channel-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+    text-align: center;
+}
+
+.social-grid {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-top: 40px;
+}
+
+.social-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    border-radius: 20px;
+    width: 280px;
+    text-align: center;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+.social-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--accent-color);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.social-icon-lg {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.social-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+    color: #fff;
+}
+
+.social-card p {
+    font-size: 0.9rem;
+    color: var(--gray-light);
+    margin-bottom: 20px;
+}
+
+/* Brand Colors */
+.color-youtube {
+    color: #FF0000;
+}
+
+.color-instagram {
+    color: #E1306C;
+}
+
+.color-tiktok {
+    color: #00f2ea;
+    text-shadow: 2px 2px 0 #ff0050;
+}
+
+.btn-subscribe {
+    background: #FF0000;
+    color: #fff;
+    padding: 10px 25px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    display: inline-block;
+    transition: all 0.3s;
+}
+
+.btn-subscribe:hover {
+    background: #cc0000;
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
+}
+
+.btn-follow {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    padding: 8px 20px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    display: inline-block;
+    transition: all 0.3s;
+}
+
+.btn-follow:hover {
+    background: #fff;
+    color: #000;
+}
